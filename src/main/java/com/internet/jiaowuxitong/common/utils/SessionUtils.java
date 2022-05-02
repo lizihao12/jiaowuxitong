@@ -14,6 +14,10 @@ public class SessionUtils {
         Integer uid = Integer.valueOf(session.getAttribute("studentId").toString());
         return uid;
     }
+    public final static  String getAdminIdFromSession(HttpSession session){
+        String adminId = session.getAttribute("adminId").toString();
+        return adminId;
+    }
     public final static  String getNameFromSession(HttpSession session){
         return session.getAttribute("name").toString();
     }

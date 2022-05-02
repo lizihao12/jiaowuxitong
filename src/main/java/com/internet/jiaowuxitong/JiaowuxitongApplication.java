@@ -9,7 +9,6 @@ public class JiaowuxitongApplication {
 
     public static void main(String[] args) {
 
-
         SpringApplication.run(JiaowuxitongApplication.class, args);
     }
 

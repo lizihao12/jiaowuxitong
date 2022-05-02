@@ -48,6 +48,17 @@ public class Student implements Serializable {
     @ApiModelProperty(value = "年龄")
     private Integer age;
 
+    @ApiModelProperty(value = "专业")
+    private String major;
+
+    @ApiModelProperty(value = "年级")
+    private Integer garde;
+
+    @ApiModelProperty(value = "班级")
+    private String classes;
+
+
+
     @ApiModelProperty(value = "学号")
     private String studentId;
 
