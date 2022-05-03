@@ -1,7 +1,9 @@
 package com.internet.jiaowuxitong.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -28,7 +30,8 @@ public class Teacher implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "id")
-    private String id;
+    @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
 
     @ApiModelProperty(value = "院id")
     private String collegeId;
@@ -75,7 +78,13 @@ public class Teacher implements Serializable {
 
     @ApiModelProperty(value = "更新时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
+
+
     private Date gmtModified;
+    @ApiModelProperty(value = "密码")
+    private String password;
+    @ApiModelProperty(value = "判断密码是否使用")
+    private Integer password_sign;
 
 
 }
