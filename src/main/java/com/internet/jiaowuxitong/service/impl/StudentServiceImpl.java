@@ -70,6 +70,11 @@ public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> impl
      */
     @Override
     public void getAppend(StudentInfoVo studentInfoVo, Integer studentIdFromSession){
+
+        if(StringUtils.isEmpty(studentIdFromSession)){
+            throw new GuliException(20001,"请登录");
+        }
+
         Student student = new Student();
         student.setAge(studentInfoVo.getAge());
         student.setContent(studentInfoVo.getIndroduction());
