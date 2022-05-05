@@ -65,10 +65,10 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
 
         //创建page
         Page<Student> pageStudent = new Page<>(current, limit);
+        QueryWrapper<Student> queryWrapper = new QueryWrapper<>();
         studentService.page(pageStudent,null);
         List<Student> lists = pageStudent.getRecords();
-        long total = pageStudent.getTotal();
-        System.out.println(total+"111111111111111"+lists);
+
 
 
 //        List<Student> lists = studentService.list(null);

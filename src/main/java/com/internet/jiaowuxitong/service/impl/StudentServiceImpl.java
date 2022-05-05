@@ -6,10 +6,14 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.internet.jiaowuxitong.common.handler.GuliException;
 import com.internet.jiaowuxitong.entity.Student;
 import com.internet.jiaowuxitong.entity.vo.StudentInfoVo;
+import com.internet.jiaowuxitong.mapper.StudentDao;
 import com.internet.jiaowuxitong.mapper.StudentMapper;
 import com.internet.jiaowuxitong.service.StudentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+
+import java.util.List;
 
 /**
  * <p>
@@ -21,6 +25,11 @@ import org.springframework.util.StringUtils;
  */
 @Service
 public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> implements StudentService {
+    /**
+     * yh
+     */
+    @Autowired
+    StudentDao studentDao;
 
 
     @Override
@@ -102,6 +111,16 @@ public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> impl
             throw new GuliException(20001,"更新数据出现异常");
         }
 
+    }
+
+    /*
+     * yh
+     */
+    @Override
+    public List<Student> getstud(String college_id) {
+        QueryWrapper<Student> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("college_id",college_id);
+        return studentDao.selectList(queryWrapper);
     }
 
 

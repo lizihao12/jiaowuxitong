@@ -8,9 +8,11 @@ import com.internet.jiaowuxitong.common.R;
 import com.internet.jiaowuxitong.common.utils.SessionUtils;
 import com.internet.jiaowuxitong.entity.Course;
 import com.internet.jiaowuxitong.entity.Student;
+import com.internet.jiaowuxitong.entity.Task;
 import com.internet.jiaowuxitong.entity.vo.StudentInfoVo;
 import com.internet.jiaowuxitong.service.StudentCourseService;
 import com.internet.jiaowuxitong.service.StudentService;
+import com.internet.jiaowuxitong.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,11 +34,22 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/student")
+@CrossOrigin //解决跨域
 public class StudentController {
     @Autowired
     private StudentService studentService;
     @Autowired
     private StudentCourseService studentCourseSevice;
+
+
+    /**
+     * yh
+     */
+
+    @Autowired
+    TaskService taskService;
+
+
 
     @PostMapping("/login")
     public R login(@RequestParam("studentId")String studentId,
@@ -48,20 +61,38 @@ public class StudentController {
         return R.ok();
 
     }
-    @PostMapping("/getCourse")
+    @GetMapping("/getCourse")
     public R getCourse(HttpSession session){
         Integer studentIdFromSession = SessionUtils.getStudentIdFromSession(session);
         List<Course> courses = studentCourseSevice.getCourse(studentIdFromSession);
         return R.ok().data("course",courses);
 
     }
-
-    @PostMapping("/getAppend")
+    /**
+     * 追加学生数据
+     */
+    @PutMapping("/getAppend")
     public R getAppend(@RequestBody(required = true) StudentInfoVo studentInfoVo,HttpSession session){
         Integer studentIdFromSession = SessionUtils.getStudentIdFromSession(session);
         studentService.getAppend(studentInfoVo,studentIdFromSession);
         return R.ok();
 
+    }
+    /**
+     * yh
+     */
+    @GetMapping("{college_id}")
+    public List<Student> getstud(@PathVariable String college_id){
+        return studentService.getstud(college_id);
+    }
+
+    @PutMapping
+    public boolean publish(@RequestBody Task task){
+        return taskService.save(task);
+    }
+    @PostMapping
+    public List<Task> allpub(){
+        return taskService.list(null);
     }
 
 }

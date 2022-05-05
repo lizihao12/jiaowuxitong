@@ -1,8 +1,8 @@
 package com.internet.jiaowuxitong.controller;
 
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/course")
+@CrossOrigin //解决跨域
 public class CourseController {
 
 }

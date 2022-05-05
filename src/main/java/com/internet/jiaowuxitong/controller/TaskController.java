@@ -6,10 +6,7 @@ import com.internet.jiaowuxitong.common.utils.SessionUtils;
 import com.internet.jiaowuxitong.entity.Task;
 import com.internet.jiaowuxitong.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -24,6 +21,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/task")
+@CrossOrigin //解决跨域
 public class TaskController {
     @Autowired
     private TaskService taskService;
@@ -36,7 +34,7 @@ public class TaskController {
 
     }
     //获得发布信息
-    @PostMapping("/getTask")
+    @GetMapping("/getTask")
     public R getTask(){
 
         List<Task> lists = taskService.getTask();

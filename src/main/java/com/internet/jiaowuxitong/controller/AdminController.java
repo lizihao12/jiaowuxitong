@@ -6,9 +6,13 @@ import com.internet.jiaowuxitong.common.R;
 import com.internet.jiaowuxitong.common.utils.SessionUtils;
 import com.internet.jiaowuxitong.entity.Admin;
 import com.internet.jiaowuxitong.entity.Student;
+import com.internet.jiaowuxitong.entity.Teacher;
+import com.internet.jiaowuxitong.entity.Teacher_course;
 import com.internet.jiaowuxitong.entity.vo.StudentsInfoVo;
 import com.internet.jiaowuxitong.service.AdminService;
+import com.internet.jiaowuxitong.service.ClassService;
 import com.internet.jiaowuxitong.service.StudentService;
+import com.internet.jiaowuxitong.service.TeachService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,12 +29,22 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/admin")
+@CrossOrigin //解决跨域
 public class AdminController {
     @Autowired
     private AdminService adminService;
 
     @Autowired
     private StudentService studentService;
+
+    /**
+     * yh
+     */
+    @Autowired
+    private TeachService teachService;
+
+    @Autowired
+    private ClassService classService;
 
     @PostMapping("/login")
     public R login(@RequestParam("adminId")String adminId,
@@ -50,7 +64,7 @@ public class AdminController {
      * @return
      */
     //参看全部的
-    @PostMapping("/getStudents/{current}/{limit}")
+    @GetMapping("/getStudents/{current}/{limit}")
     public R getStudents(@PathVariable Long current,
                        @PathVariable Long limit,HttpSession session){
 
@@ -63,7 +77,7 @@ public class AdminController {
     }
 
     //批量删除
-    @PostMapping("/deleteStudents")
+    @DeleteMapping("/deleteStudents")
     public R deleteStudents(
             @RequestParam String[] studentIds, HttpSession session){
 
@@ -75,7 +89,7 @@ public class AdminController {
         return R.ok();
     }
     //修改
-    @PostMapping("/updateStudents/{studentId}")
+    @PutMapping("/updateStudents/{studentId}")
     public R updateStudents(@PathVariable String studentId,
             @RequestBody StudentsInfoVo studentsInfoVo,HttpSession session){
 
@@ -85,7 +99,7 @@ public class AdminController {
     }
 
     //查看一个学生
-    @PostMapping("/getStudent/{studentId}")
+    @GetMapping("/getStudent/{studentId}")
     public R getStudent(@PathVariable String studentId,
                             HttpSession session){
 
@@ -94,5 +108,20 @@ public class AdminController {
         return R.ok().data("student",student);
     }
 
+
+    /**
+     * yh
+     */
+
+
+    @PostMapping
+    public boolean updateT(@RequestBody Teacher teacher){
+        return teachService.updateById(teacher);
+    }
+
+    @PostMapping("/xxx")
+    public boolean updateC(@RequestBody Teacher_course teacher_course){
+        return classService.updateById(teacher_course);
+    }
 }
 

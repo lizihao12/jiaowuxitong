@@ -79,7 +79,9 @@ public class Teacher implements Serializable {
     @ApiModelProperty(value = "更新时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
 
-
+    /*
+    yh
+     */
     private Date gmtModified;
     @ApiModelProperty(value = "密码")
     private String password;

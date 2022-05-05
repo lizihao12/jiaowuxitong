@@ -6,7 +6,8 @@ import com.internet.jiaowuxitong.common.utils.SessionUtils;
 import com.internet.jiaowuxitong.entity.vo.CreditsInfoVo;
 import com.internet.jiaowuxitong.service.StudentCourseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,11 +24,12 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/studentCourse")
+@CrossOrigin //解决跨域
 public class StudentCourseController {
     @Autowired
     private StudentCourseService studentCourseService;
 
-    @PostMapping("/getCredit")
+    @GetMapping("/getCredit")
     public R getCredit(HttpSession session){
         Integer studentIdFromSession = SessionUtils.getStudentIdFromSession(session);
         List<CreditsInfoVo> lists = studentCourseService.getCredit(studentIdFromSession);
